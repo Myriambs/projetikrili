@@ -34,14 +34,18 @@ const logout=()=>{
   localStorage.removeItem('token')
   navigate('/login')
 }
+
+useEffect(()=>{
+ token ? (authUser.role === "admin" ? navigate('/admin') : navigate('/user')) : navigate('/login')
+},[token,authUser])
   return (
     <div>
 
-{token ? (<>
+{/* {token ? (<>
 {
 authUser.role === "admin" ?  <Admin auth={authUser} logout={logout} /> : <Client auth={authUser} logout={logout} /> 
 
-}</>):(<Login/>)}
+}</>):(<Login/>)} */}
  
     </div>
     

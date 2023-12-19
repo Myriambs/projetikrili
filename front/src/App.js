@@ -6,11 +6,14 @@ import PrivateRoute from './components/privateroute/PrivateRoute';
 import Register2 from './components/register/Register2';
 import Dorra from './components/Dorra/Dorra';
 import Admin from './components/Admin/Admin';
-import AjoutStatdium from './components/Admin/zidenkeryet/AjoutStadium/AjoutStatdium';
-import UpdateStadium from './components/Admin/zidenkeryet/UpdateStadium/UpdateStadium'
 import Categroie from './components/produiyet/Categroie';
 import Produiyet from './components/produiyet/Produiyet';
 import Reservation from './components/Reservation';
+import Client from './components/User/Client';
+import ListReservations from './components/Admin/partieProduit_/ListReservations';
+import AddReservation from './components/Admin/partieProduit_/AddReservation';
+import UpdateReservation from './components/Admin/partieProduit_/UpdateReservation';
+import DeleteReservation from './components/Admin/partieProduit_/DeleteReservation';
 function App() {
   return (
     <div >
@@ -19,11 +22,16 @@ function App() {
 <Route path='/dorra' element ={<Dorra/>}/>
 <Route path='/register' element = {<Register2/>}/>
 <Route path='/login' element = {<Login/>}/>
-<Route path='/admin' element = {<Admin/>}/>
+//lina partie go to el component selon el role mt3ik 
 <Route path='/app/privateRoute' element = {<PrivateRoute/>}/> 
-<Route path='/zidstadium' element = {<AjoutStatdium/>}/> 
-<Route path='/zidstadium/:id' element = {<UpdateStadium/>}/> 
-    
+
+
+//lina partie admin 
+<Route path='/admin' element = {<Admin/>}/>
+<Route path='/user' element = {<Client/>}/>
+
+
+
 <Route path='/gat' element={<Categroie/>}/>
 <Route path='/produits/:id' element={<Produiyet/>}/>
 
@@ -36,13 +44,19 @@ function App() {
  <Route path='/ajoutCategorie' element={<Produiyet/>}/> 
  <Route path='/removeCategorie/:id' element={<Produiyet/>}/> 
 
-<Route path='/reservation/:idproduit/:iduser' element={<Reservation/>}/>
 
- {/* pannier */}
+//lin apartie user chy3ml reservation plau update profil 
+<Route path="/reservations/:userId" element={<ListReservations />} />
 
+{/* Add Reservation */}
+<Route path="/add-reservation/:userId/:produits" element={<AddReservation />} />
 
-{/* reservation */}
-{/* nposty date , jour heure w note impoirtante in case of tji lil admin ytoguli el accept ou remove  tji updated lil user  */}
+{/* Update Reservation */}
+<Route path="/update-reservation/:userId/:reservationId" element={<UpdateReservation />} />
+
+{/* Delete Reservation */}
+<Route path="/delete-reservation/:userId/:reservationId" element={<DeleteReservation />} />
+
      </Routes>
 
 

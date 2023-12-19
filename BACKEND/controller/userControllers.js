@@ -50,3 +50,23 @@ exports.login=async(req,res)=>{
         console.log(err)
     }
 }
+
+exports.updatedProfil = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        // Use findByIdAndUpdate on the model (User) and fix the syntax
+        const updatedProfil = await userSchema.findByIdAndUpdate(id, { $set: { ...req.body } }, { new: true });
+
+        // Check if the user was found and updated
+        if (!updatedProfil) {
+            console.log('user not found')
+            return res.status(404).send('User not found');
+        }
+
+        res.status(200).send('The user profile is updated');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Internal Server Error');
+    }
+};

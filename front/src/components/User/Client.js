@@ -1,12 +1,40 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './user.css'
-import Cartetna from './jibenhom/Cartetna'
-/*  import StadiumCards from '../Cards/StadiumCards'  */
-const Client = ({auth,logout}) => {
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { setAuth } from '../../redux/authSlice'
+import { fetchAuthUser } from '../../api/authuser'
+const Client = () => {
+
+  const token = localStorage.getItem('token')
+const logout=()=>{
+  localStorage.removeItem('token')
+  navigate('/login')
+}
+
+const dispatch =  useDispatch()
+const navigate = useNavigate()
+
+const authUser = useSelector(state=>state.auth)
+
+console.log(' data  auth -_- => ',authUser)
+const getAcount=async()=>{
+  try{
+    const data = await fetchAuthUser()
+    console.log('data login =WWWWWWWWWW/*  */', data)
+    await dispatch(setAuth(data)) 
+  }catch(err){
+    console.log(err)
+  }
+}
+
+useEffect(()=>{
+  getAcount()
+},[])
+
   return (
     <div className='bodyF'>
-    {/*   <StadiumCards/> */}
-    <div className="appClient">
+<div className="appClient">
     <header className="app-header">
       <div className="app-header-logo">
         <div className="logo">
@@ -33,7 +61,7 @@ const Client = ({auth,logout}) => {
       </div>
       <div className="app-header-actions">
         <button className="user-profile">
-          <span>{auth.name} {auth.lastName}</span>
+          <span>{authUser.name} {authUser.lastName}</span>
           <span  style={{height: "74px",width: "77px"}}  >
             <img src="https://assets.codepen.io/285131/almeria-avatar.jpeg" />
           </span>
@@ -117,7 +145,8 @@ const Client = ({auth,logout}) => {
             </p>
           </div>
         </section>
-       <Cartetna/>
+
+        {/* //lina partie kwaret */}
       </div>
       <div className="app-body-sidebar">
         <section className="payment-section">

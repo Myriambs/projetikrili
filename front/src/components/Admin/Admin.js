@@ -1,19 +1,36 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./Admin.css"
-import StadiumCards from './zidenkeryet/Cards/StadiumCards'
 import {useNavigate} from 'react-router-dom'
-import AjoutStadium from './zidenkeryet/AjoutStadium/AjoutStatdium'
-import { useSelector } from 'react-redux'
-const Admin = ({auth,logout}) => {
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchAuthUser } from '../../api/authuser'
+import { setAuth } from '../../redux/authSlice'
+const Admin = () => {
 
-  const authUser = useSelector(state=>state.auth)
+  const token = localStorage.getItem('token')
+const logout=()=>{
+  localStorage.removeItem('token')
+  navigate('/login')
+}
 
-  const navigate = useNavigate()
-  console.log('nthbtou foil aut',authUser)
-  const gotoaddstadiums = async()=>{
+const dispatch =  useDispatch()
+const navigate = useNavigate()
 
-    navigate("/zidstadium")
+const authUser = useSelector(state=>state.auth)
+
+console.log(' data  auth -_- => ',authUser)
+const getAcount=async()=>{
+  try{
+    const data = await fetchAuthUser()
+    console.log('data login =WWWWWWWWWW/*  */', data)
+    await dispatch(setAuth(data)) 
+  }catch(err){
+    console.log(err)
   }
+}
+
+useEffect(()=>{
+  getAcount()
+},[])
   return (
     <div className='bodyAdmin'>
     <header className="headerAdmin">
@@ -52,17 +69,11 @@ const Admin = ({auth,logout}) => {
       <div className="responsive-wrapper">
         <div lassName="main-header">
           <h1>ya Welcome </h1>
-{/*           lina search part 
- */}         {/*  <div className="search">
-            <input type="text" placeholder="Search" />
-            <button type="submit">
-              <i className="ph-magnifying-glass-bold" />
-            </button>
-          </div> */}
+
         </div>
         <div className="horizontal-tabs">
           <a href="#">My Stadiums</a>
-          <a href="#"  onClick={()=>gotoaddstadiums()}  >Add Stadiums </a>
+          <a href="#"   >Add Stadiums </a>
           <a href="#">view users </a>
           <a href="#">view reservations </a>
           <a href="#">Plan</a>
@@ -101,7 +112,6 @@ const Admin = ({auth,logout}) => {
           </div>
           <div className="content-main">
             <div className="card-grid">
-              <StadiumCards/>
              
             </div>
           </div>

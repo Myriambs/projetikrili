@@ -1,10 +1,8 @@
 import React from 'react'
 import './Dorra.css'
-import StadiumCards from '../Admin/zidenkeryet/Cards/StadiumCards'
 const Dorra = () => {
   return (
     <div className='bodyF'>
-    {/*   <StadiumCards/> */}
     <div className="appDorra">
     <header className="app-header">
       <div className="app-header-logo">
@@ -34,14 +32,12 @@ const Dorra = () => {
       </div>
       <div className="app-header-actions">
         <button className="user-profile">
-          {/* <span>na</span> */}
           <span>
             <img src="https://assets.codepen.io/285131/almeria-avatar.jpeg" />
           </span>
         </button>
         <div className="app-header-actions-buttons">
           <button className="icon-button large"
-           /* onClick={()=>logout()} */
            >
             <i className="ph-magnifying-glass" />
           </button>
@@ -75,12 +71,8 @@ const Dorra = () => {
             <button className="flat-button">Toggle search</button>
           </div>
 
-
-        {/*   {
-
-          } */}
           <div className="tiles">
-      {/*    <StadiumCards/> */}
+     
          
           </div>
           <div className="service-section-footer">
@@ -106,7 +98,6 @@ const Dorra = () => {
           <div className="transfers">
           
            
-           <StadiumCards/>
           </div>
         </section>
       </div>
@@ -162,53 +153,7 @@ const Dorra = () => {
               </button>
             </div>
           </div>
-          {/* <div className="payments">
-            <div className="payment">
-              <div className="card green">
-                <span>01/22</span>
-                <span>•••• 4012</span>
-              </div>
-              <div className="payment-details">
-                <h3>Internet</h3>
-                <div>
-                  <span>$ 2,110</span>
-                  <button className="icon-button">
-                    <i className="ph-caret-right-bold" />
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div className="payment">
-              <div className="card olive">
-                <span>12/23</span>
-                <span>•••• 2228</span>
-              </div>
-              <div className="payment-details">
-                <h3>Universal</h3>
-                <div>
-                  <span>$ 5,621</span>
-                  <button className="icon-button">
-                    <i className="ph-caret-right-bold" />
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div className="payment">
-              <div className="card gray">
-                <span>03/22</span>
-                <span>•••• 5214</span>
-              </div>
-              <div className="payment-details">
-                <h3>Gold</h3>
-                <div>
-                  <span>$ 3,473</span>
-                  <button className="icon-button">
-                    <i className="ph-caret-right-bold" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div> */}
+         
           <div className="faq">
             <p>Most frequently asked questions</p>
             <div>

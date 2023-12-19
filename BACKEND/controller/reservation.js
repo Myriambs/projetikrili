@@ -2,6 +2,8 @@
 
 const Reservation = require('../model/Reservation');
 
+
+//http://localhost:4000/reservation/:userId/
 exports.getUserReservation = async (req, res) => {
     try {
         const reservations = await Reservation.find({ userId: req.params.userId });
@@ -10,6 +12,7 @@ exports.getUserReservation = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
+//http://localhost:4000/reservation/:userId/
 
 exports.addReservation = async (req, res) => {
   
@@ -20,7 +23,8 @@ exports.addReservation = async (req, res) => {
         const newReservation = new Reservation({
             userId,
             produits,
-            reservationDate
+            reservationDate,
+            accepted:false
         });
 
         await newReservation.save();
@@ -29,6 +33,7 @@ exports.addReservation = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
+//http://localhost:4000/reservation/:userId/:reservationId
 
 exports.deleteReservation = async (req, res) => {
     try {
@@ -38,6 +43,7 @@ exports.deleteReservation = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
+//http://localhost:4000/reservation/:userId/:reservationId
 
 exports.updateReservation = async (req, res) => {
     try {
@@ -56,3 +62,19 @@ exports.updateReservation = async (req, res) => {
         res.status(500).send(error);
     }
 };
+
+exports.getReservationById = async (req, res) => {
+    try {
+      const { userId, reservationId } = req.params;
+      const reservation = await Reservation.findOne({ _id: reservationId, userId });
+  
+      if (!reservation) {
+        return res.status(404).json({ message: 'Reservation not found' });
+      }
+  
+      res.json(reservation);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+  

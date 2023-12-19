@@ -2,7 +2,7 @@ const express = require('express')
 
 const userRoute = express.Router()
 
-const {register,login} = require('../controller/userControllers')
+const {register,login,updatedProfil} = require('../controller/userControllers')
 const {isAuth} = require('../middelwares/isAuth')
 const {registerValidation,loginValidation,validation} = require('../middelwares/RegisterValidation')
 
@@ -16,6 +16,7 @@ userRoute.get('/me',isAuth,(req,res)=>{
     
 })
 
+userRoute.put('/updateProfil/:id',isAuth,registerValidation,validation,updatedProfil)
 
 
 
